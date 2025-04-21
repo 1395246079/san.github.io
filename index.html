@@ -1,44 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>準備好了嗎</title>
+    <meta charset="UTF-8">
+    <title>音乐网站终极稳定版</title>
     <style>
+        :root {
+            --primary: #2ecc71;
+            --background: #f0f0f0;
+        }
         body {
-            text-align: center;
-            background: #f0f0f0;
-            padding: 50px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--background);
             font-family: Arial, sans-serif;
         }
-        .player {
+        .container {
             background: white;
-            padding: 30px;
+            padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
             max-width: 500px;
-            margin: 0 auto;
+            width: 90%;
         }
         audio {
             width: 100%;
             margin: 20px 0;
         }
+        .status {
+            color: var(--primary);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <div class="player">
-        <h1>🎵 Drama 🎵</h1>
-        <audio controls autoplay loop>
-            <!-- sanchen -->
-            <source src="sanchen.mp3" type="audio/mpeg">
-            浏览器不支持音频播放
+    <div class="container">
+        <h1>🎶 音乐空间 🎶</h1>
+        <p class="status" id="status">系统自检中...</p>
+        <audio id="player" controls>
+            <!-- 使用绝对路径确保文件可访问 -->
+            <source src="/sanchen.mp3" type="audio/mpeg">
         </audio>
-        <p>提示：永遠的神</p>
     </div>
 
     <script>
-        // 解决自动播放限制
-        document.addEventListener('click', function() {
-            document.querySelector('audio').play()
-        })
+        // 自动诊断系统
+        function checkFile() {
+            fetch('/sanchen.mp3')
+                .then(response => {
+                    if(response.ok) {
+                        document.getElementById('status').textContent = "✅ 音乐文件验证通过";
+                        document.getElementById('player').play().catch(() => {
+                            document.getElementById('status').textContent += " | 点击页面激活播放";
+                        });
+                    } else {
+                        document.getElementById('status').textContent = "❌ 音乐文件未找到";
+                    }
+                });
+        }
+
+        // 用户交互处理
+        document.addEventListener('click', () => {
+            document.getElementById('player').play();
+        });
+
+        // 启动检测
+        checkFile();
     </script>
 </body>
 </html>
