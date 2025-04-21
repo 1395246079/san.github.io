@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>準備好了嗎</title>
+    <style>
+        body {
+            text-align: center;
+            background: #f0f0f0;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+        .player {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        audio {
+            width: 100%;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="player">
+        <h1>🎵 Drama 🎵</h1>
+        <audio controls autoplay loop>
+            <!-- sanchen -->
+            <source src="sanchen.mp3" type="audio/mpeg">
+            浏览器不支持音频播放
+        </audio>
+        <p>提示：永遠的神</p>
+    </div>
+
+    <script>
+        // 解决自动播放限制
+        document.addEventListener('click', function() {
+            document.querySelector('audio').play()
+        })
+    </script>
+</body>
+</html>
